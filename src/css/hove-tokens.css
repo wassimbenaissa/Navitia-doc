@@ -1,0 +1,180 @@
+/* ==========================================================================
+   HOVE — Design System / Foundations
+   Vendored from the "HOVE Design System" package (colors_and_type.css).
+   Source of truth: uploads/Couleurs.svg, Couleurs-2.svg, Typographie.svg,
+   New TR - Components.svg
+
+   Only the foundations travel here: tokens, @font-face rules. The package's
+   type-ramp utility classes and bare-element defaults are left out — Docusaurus
+   owns element styling, and custom.css maps these tokens onto Infima instead.
+   The font files sit next to this file, so webpack fingerprints them.
+   ========================================================================== */
+
+/* ----- Webfonts ---------------------------------------------------------- */
+/* Inter (UI) + DM Mono (system/doc) are loaded from Google Fonts by the
+   `stylesheets` entry in docusaurus.config.ts, so the preconnect hints can go
+   in <head> ahead of them. */
+
+/* Uxum Grotesque = brand display/headline face (custom) */
+@font-face {
+  font-family: 'Uxum Grotesque';
+  src: url('./fonts/UxumGrotesque-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uxum Grotesque';
+  src: url('./fonts/UxumGrotesque-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Uxum Grotesque';
+  src: url('./fonts/UxumGrotesque-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ===== PRIMARY BRAND COLORS =========================================== */
+  --orange: #fd4703; /* signature accent — CTAs, key actions            */
+  --dark-blue: #002830; /* primary brand ink / app chrome / headers       */
+  --blue-teal: #004650; /* secondary surface — active nav, selected state */
+  --blue-keolis: #00aece; /* bright cyan — logo, primary buttons, highlights */
+  --brown: #7c7369; /* warm neutral — muted text, subtle accents      */
+  --light-grey: #d7d2cb; /* warm grey — borders, dividers, panel fills     */
+
+  /* ===== UI ============================================================= */
+  --blue-ui: #1b6cff; /* interactive blue — links, focus, info actions  */
+
+  /* ===== ALERT / SEMANTIC =============================================== */
+  --success: #24a148;
+  --error: #da1e28;
+  --warning: #ffa144;
+  --information: #3eaac5;
+
+  /* ===== TINT/SHADE SCALES (10·25·50·75·90·100) ========================= */
+  /* Dark blue */
+  --darkblue-10: #e5e9ea;
+  --darkblue-25: #bfc9cb;
+  --darkblue-50: #809397;
+  --darkblue-75: #405e64;
+  --darkblue-90: #002830;
+  --darkblue-100: #002830;
+  --darkblue-50aa: #69797d;
+  /* Blue teal */
+  --blueteal-10: #e5eced;
+  --blueteal-25: #bfd1d3;
+  --blueteal-50: #80a2a7;
+  --blueteal-75: #40747c;
+  --blueteal-90: #004650;
+  --blueteal-100: #004650;
+  --blueteal-50aa: #5c7b80;
+  /* Blue Keolis */
+  --bluekeolis-10: #e5f7fb;
+  --bluekeolis-25: #bfebf3;
+  --bluekeolis-50: #80d7e7;
+  --bluekeolis-75: #40c2da;
+  --bluekeolis-90: #00aece;
+  --bluekeolis-100: #00aece;
+  /* Orange */
+  --orange-10: #ffede6;
+  --orange-25: #ffd1c0;
+  --orange-50: #fea381;
+  --orange-75: #fd7542;
+  --orange-90: #fd4703;
+  --orange-100: #fd4703;
+  /* Light grey (warm) */
+  --lightgrey-10: #fbfafa;
+  --lightgrey-25: #f5f4f2;
+  --lightgrey-50: #ebe9e5;
+  --lightgrey-75: #e1ddd8;
+  --lightgrey-90: #d7d2cb;
+  --lightgrey-100: #d7d2cb;
+  /* Brown (warm neutral) */
+  --brown-10: #f2f1f0;
+  --brown-25: #dedcd9;
+  --brown-50: #bdb9b4;
+  --brown-75: #9d968e;
+  --brown-90: #7c7369;
+  --brown-100: #7c7369;
+  /* Black / cool neutral */
+  --black-10: #e5e5e5;
+  --black-25: #c7c7c7;
+  --black-50: #808080;
+  --black-75: #404040;
+  --black-90: #1a1a1a;
+  --black-100: #000000;
+
+  /* ===== DERIVED STATE STEPS ============================================ */
+  /* "Hover = darken the fill one ramp step (e.g. cyan → #0098B5)" (README →
+     VISUAL FOUNDATIONS / States). The package ships tints only, so the darker
+     ends of the cyan and teal ramps are extrapolated from that documented step. */
+  --bluekeolis-hover: #0098b5;
+  --bluekeolis-active: #00758b; /* cyan darkened until it passes AA on white */
+  --bluekeolis-ink: #006076;
+  --blueteal-hover: #0a5b66;
+  --orange-hover: #e23d00;
+  --blue-ui-hover: #0f56d1;
+  /* Dark-mode surfaces: the chrome colour is the canvas, so one step up for
+     raised surfaces and one step down for wells. */
+  --darkblue-surface: #003a44;
+  --darkblue-deep: #001d23;
+  --hairline-on-dark: rgba(255, 255, 255, 0.1);
+
+  /* ===== SEMANTIC TOKENS ================================================ */
+  --bg-app: #ffffff; /* default app canvas                  */
+  --bg-subtle: var(--lightgrey-25); /* panels, table zebra                 */
+  --bg-chrome: var(--dark-blue); /* sidebar / top chrome                */
+  --bg-chrome-sel: var(--blue-teal); /* selected chrome item                */
+
+  --fg1: var(--dark-blue); /* primary text on light               */
+  --fg2: var(--brown-90); /* secondary / muted text              */
+  --fg3: var(--black-50); /* tertiary / placeholder              */
+  --fg-on-dark: #ffffff; /* primary text on dark chrome         */
+  --fg-on-dark-2: var(--blueteal-50); /* muted text on dark chrome           */
+
+  --border: var(--lightgrey-90);
+  --border-strong: var(--brown-75);
+  --divider: var(--lightgrey-75);
+
+  --accent: var(--orange); /* signature accent                    */
+  --link: var(--blue-ui);
+
+  /* ===== TYPE FAMILIES ================================================== */
+  --font-display: 'Uxum Grotesque', 'Arial Black', sans-serif; /* titrage */
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif; /* web+mobile */
+  --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace; /* doc */
+
+  /* ===== RADIUS ========================================================= */
+  --radius-sm: 4px; /* tags, small chips           */
+  --radius-md: 8px; /* buttons, inputs, menu items */
+  --radius-lg: 12px; /* cards, popovers, menus      */
+  --radius-xl: 16px; /* large surfaces              */
+  --radius-pill: 999px;
+
+  /* ===== ELEVATION ====================================================== */
+  --shadow-sm: 0 1px 2px rgba(0, 40, 48, 0.06), 0 1px 3px rgba(0, 40, 48, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 40, 48, 0.1);
+  --shadow-lg: 0 12px 32px rgba(0, 40, 48, 0.16);
+  --shadow-pop: 0 8px 24px rgba(0, 40, 48, 0.18); /* menus / tooltips */
+
+  /* ===== SPACING (4pt base) ============================================= */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* ===== MOTION ========================================================= */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur: 180ms;
+}

@@ -1,0 +1,743 @@
+/**
+ * Navitia documentation — HOVE design system skin.
+ *
+ * `hove-tokens.css` carries the design system's own tokens verbatim; this file
+ * maps them onto Infima (the Docusaurus theme layer) and restyles the few
+ * surfaces Infima does not express as variables.
+ *
+ * Adaptation notes, where the docs site cannot be a literal copy of the app:
+ *  - The DS's dark chrome is the app sidebar. Here it is the navbar + footer;
+ *    the doc sidebar stays a light warm surface because it is content, not
+ *    chrome.
+ *  - The type ramp is scaled for long-form reading (16px body instead of the
+ *    app's 14px); families and their roles are unchanged.
+ *  - Links use `--link` (`--blue-ui`), as the DS assigns. The brand cyan is the
+ *    accent for chrome, selection and active states, where it is not body text.
+ */
+
+/* ==========================================================================
+   1. Infima mapping — light
+   ========================================================================== */
+
+:root {
+  /* --- Brand ramp. Infima's `primary` is used as text (links, active menu
+     items), so the base sits two steps down the cyan ramp to clear AA on
+     white; the pure brand cyan stays as `-light`, for fills and bars. --- */
+  --ifm-color-primary: var(--bluekeolis-active);
+  --ifm-color-primary-dark: var(--bluekeolis-ink);
+  --ifm-color-primary-darker: #00566a;
+  --ifm-color-primary-darkest: var(--blue-teal);
+  --ifm-color-primary-light: var(--blue-keolis);
+  --ifm-color-primary-lighter: var(--bluekeolis-75);
+  --ifm-color-primary-lightest: var(--bluekeolis-50);
+
+  /* --- Warm neutrals. Infima derives every emphasis step from this ramp, so
+     remapping it is what makes borders, dividers and muted text warm. --- */
+  --ifm-color-gray-100: var(--lightgrey-10);
+  --ifm-color-gray-200: var(--lightgrey-25);
+  --ifm-color-gray-300: var(--lightgrey-75);
+  --ifm-color-gray-400: var(--lightgrey-90);
+  --ifm-color-gray-500: var(--brown-50);
+  --ifm-color-gray-600: var(--brown-75);
+  --ifm-color-gray-700: var(--brown-90);
+  --ifm-color-gray-800: var(--darkblue-75);
+  --ifm-color-gray-900: var(--dark-blue);
+
+  /* --- Semantic / alert --- */
+  --ifm-color-success: var(--success);
+  --ifm-color-info: var(--information);
+  --ifm-color-warning: var(--warning);
+  --ifm-color-danger: var(--error);
+  --ifm-color-secondary: var(--lightgrey-90);
+
+  --ifm-color-success-contrast-background: #e5f4ea;
+  --ifm-color-success-contrast-foreground: #12692f;
+  --ifm-color-info-contrast-background: var(--bluekeolis-10);
+  --ifm-color-info-contrast-foreground: var(--blue-teal);
+  --ifm-color-warning-contrast-background: #fff1e0;
+  --ifm-color-warning-contrast-foreground: #8a5100;
+  --ifm-color-danger-contrast-background: #fdedee;
+  --ifm-color-danger-contrast-foreground: #a8161e;
+  --ifm-color-secondary-contrast-background: var(--lightgrey-25);
+  --ifm-color-secondary-contrast-foreground: var(--fg1);
+
+  /* --- Surfaces & text --- */
+  --ifm-background-color: var(--bg-app);
+  --ifm-background-surface-color: var(--bg-app);
+  --ifm-color-content: var(--fg1);
+  --ifm-color-content-secondary: var(--fg2);
+  --ifm-heading-color: var(--fg1);
+  --ifm-hover-overlay: var(--lightgrey-25);
+
+  --ifm-link-color: var(--link);
+  --ifm-link-hover-color: var(--blue-ui-hover);
+  --ifm-link-decoration: none;
+  --ifm-link-hover-decoration: underline;
+
+  /* --- Type --- */
+  --ifm-font-family-base: var(--font-body);
+  --ifm-font-family-monospace: var(--font-mono);
+  --ifm-heading-font-family: var(--font-display);
+  --ifm-heading-font-weight: 700;
+  --ifm-font-weight-semibold: 600;
+  --ifm-line-height-base: 1.6;
+  --ifm-h1-font-size: 2.5rem;
+  --ifm-h2-font-size: 1.75rem;
+  --ifm-h3-font-size: 1.25rem;
+  --ifm-h4-font-size: 1rem;
+  --ifm-code-font-size: 92%;
+
+  /* --- Shape, elevation, motion --- */
+  --ifm-global-radius: var(--radius-md);
+  --ifm-button-border-radius: var(--radius-md);
+  --ifm-code-border-radius: var(--radius-sm);
+  --ifm-pre-border-radius: var(--radius-lg);
+  --ifm-card-border-radius: var(--radius-lg);
+  --ifm-alert-border-radius: var(--radius-lg);
+  --ifm-pagination-nav-border-radius: var(--radius-lg);
+  --ifm-global-shadow-lw: var(--shadow-sm);
+  --ifm-global-shadow-md: var(--shadow-md);
+  --ifm-global-shadow-tl: var(--shadow-lg);
+  --ifm-transition-fast: var(--dur-fast);
+  --ifm-transition-slow: var(--dur);
+  --ifm-transition-timing-default: var(--ease);
+
+  /* --- Chrome --- */
+  --ifm-navbar-height: 4rem;
+  --ifm-navbar-background-color: var(--bg-chrome);
+  --ifm-navbar-shadow: none;
+  --ifm-navbar-link-color: rgba(255, 255, 255, 0.78);
+  --ifm-navbar-link-hover-color: var(--fg-on-dark);
+  --ifm-navbar-link-active-color: var(--fg-on-dark);
+  --ifm-navbar-search-input-background-color: rgba(255, 255, 255, 0.08);
+  --ifm-navbar-search-input-color: var(--fg-on-dark);
+  --ifm-navbar-search-input-placeholder-color: var(--blueteal-50);
+
+  --ifm-footer-background-color: var(--bg-chrome);
+  --ifm-footer-color: var(--blueteal-50);
+  --ifm-footer-title-color: var(--fg-on-dark);
+  --ifm-footer-link-color: rgba(255, 255, 255, 0.72);
+  --ifm-footer-link-hover-color: var(--blue-keolis);
+  --ifm-footer-padding-vertical: var(--sp-10);
+
+  /* --- Doc surfaces --- */
+  --ifm-menu-color: var(--fg2);
+  --ifm-menu-color-active: var(--fg1);
+  --ifm-menu-color-background-active: var(--bluekeolis-10);
+  --ifm-menu-color-background-hover: var(--lightgrey-25);
+  --ifm-toc-border-color: var(--border);
+  --ifm-toc-link-color: var(--fg2);
+  --ifm-table-border-color: var(--border);
+  --ifm-table-stripe-background: var(--lightgrey-10);
+  --ifm-table-head-background: var(--lightgrey-10);
+  --ifm-table-head-color: var(--fg2);
+  --ifm-code-background: var(--lightgrey-25);
+  --ifm-blockquote-color: var(--fg1);
+  --ifm-blockquote-border-color: var(--blue-keolis);
+  --ifm-breadcrumb-color-active: var(--fg1);
+  --ifm-breadcrumb-item-background-active: var(--bluekeolis-10);
+  --ifm-scrollbar-track-background-color: var(--lightgrey-25);
+  --ifm-scrollbar-thumb-background-color: var(--lightgrey-90);
+  --ifm-scrollbar-thumb-hover-background-color: var(--brown-50);
+
+  --docusaurus-highlighted-code-line-bg: var(--bluekeolis-10);
+}
+
+/* ==========================================================================
+   2. Infima mapping — dark
+   The app chrome colour becomes the canvas; blue teal is the raised surface,
+   exactly as it is the "selected surface" in the app.
+   ========================================================================== */
+
+[data-theme='dark'] {
+  --ifm-color-primary: var(--blue-keolis);
+  --ifm-color-primary-dark: var(--bluekeolis-hover);
+  --ifm-color-primary-darker: var(--bluekeolis-active);
+  --ifm-color-primary-darkest: var(--blue-teal);
+  --ifm-color-primary-light: var(--bluekeolis-75);
+  --ifm-color-primary-lighter: var(--bluekeolis-50);
+  --ifm-color-primary-lightest: var(--bluekeolis-25);
+
+  --ifm-background-color: var(--dark-blue);
+  --ifm-background-surface-color: var(--darkblue-surface);
+  --ifm-color-content: #e8eff0;
+  --ifm-color-content-secondary: var(--blueteal-50);
+  --ifm-heading-color: var(--fg-on-dark);
+  --ifm-hover-overlay: rgba(255, 255, 255, 0.06);
+
+  --ifm-link-color: var(--blue-keolis);
+  --ifm-link-hover-color: var(--bluekeolis-75);
+
+  --ifm-color-success-contrast-background: #0a3a1c;
+  --ifm-color-success-contrast-foreground: #a8e5bc;
+  --ifm-color-info-contrast-background: #0a3f4a;
+  --ifm-color-info-contrast-foreground: var(--bluekeolis-25);
+  --ifm-color-warning-contrast-background: #43310d;
+  --ifm-color-warning-contrast-foreground: #ffd9ac;
+  --ifm-color-danger-contrast-background: #4a1114;
+  --ifm-color-danger-contrast-foreground: #ffc3c6;
+  --ifm-color-secondary-contrast-background: var(--darkblue-surface);
+  --ifm-color-secondary-contrast-foreground: #e8eff0;
+
+  --ifm-menu-color: var(--blueteal-50);
+  --ifm-menu-color-active: var(--fg-on-dark);
+  --ifm-menu-color-background-active: var(--blue-teal);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.05);
+  --ifm-toc-border-color: var(--hairline-on-dark);
+  --ifm-toc-link-color: var(--blueteal-50);
+  --ifm-table-border-color: var(--hairline-on-dark);
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.04);
+  --ifm-table-head-background: var(--darkblue-surface);
+  --ifm-table-head-color: var(--blueteal-50);
+  --ifm-code-background: rgba(255, 255, 255, 0.09);
+  --ifm-blockquote-color: #e8eff0;
+  --ifm-breadcrumb-item-background-active: var(--blue-teal);
+  --ifm-breadcrumb-color-active: var(--fg-on-dark);
+  --ifm-scrollbar-track-background-color: var(--dark-blue);
+  --ifm-scrollbar-thumb-background-color: var(--blueteal-75);
+  --ifm-scrollbar-thumb-hover-background-color: var(--blueteal-50);
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 174, 206, 0.16);
+}
+
+/* ==========================================================================
+   3. Type — Uxum for display, Inter for UI, DM Mono for system labels
+   ========================================================================== */
+
+.markdown h1,
+.markdown h2,
+h1,
+h2 {
+  letter-spacing: -0.01em;
+}
+
+/* DS: h2 is Uxum Regular; only the display sizes are Bold. */
+.markdown h2,
+h2 {
+  font-weight: 400;
+}
+
+/* DS: h3 and below drop back to Inter Bold. */
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.markdown h2 {
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--divider);
+}
+
+[data-theme='dark'] .markdown h2 {
+  border-top-color: var(--hairline-on-dark);
+}
+
+/* The mono "section label" voice: small, wide, calm. */
+.markdown table thead th,
+.footer__title,
+.pagination-nav__sublabel {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hash-link {
+  color: var(--blue-keolis);
+}
+
+::selection {
+  background: var(--bluekeolis-25);
+  color: var(--dark-blue);
+}
+
+/* DS: focus is a --blue-ui ring. */
+:focus-visible {
+  outline: 2px solid var(--blue-ui);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+[data-theme='dark'] :focus-visible {
+  outline-color: var(--bluekeolis-75);
+}
+
+/* ==========================================================================
+   4. Navbar — dark chrome
+   ========================================================================== */
+
+.navbar {
+  border-bottom: 1px solid var(--hairline-on-dark);
+}
+
+.navbar__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--fg-on-dark);
+}
+
+.navbar__logo {
+  height: 2rem;
+}
+
+.navbar__link {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* DS: an active tab gets a 2px underline + a bolder label. */
+.navbar__link--active {
+  font-weight: 600;
+  position: relative;
+}
+
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  left: var(--ifm-navbar-item-padding-horizontal);
+  right: var(--ifm-navbar-item-padding-horizontal);
+  bottom: -0.35rem;
+  height: 2px;
+  background: var(--blue-keolis);
+  border-radius: 2px;
+}
+
+.navbar__toggle,
+.navbar .clean-btn {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.navbar .clean-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--fg-on-dark);
+}
+
+.navbar__items .navbar__link svg[class*='iconExternalLink'] {
+  opacity: 0.6;
+}
+
+/* Search field — an input on dark chrome, cyan on focus. */
+.navbar__search-input {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  height: 2.25rem;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.navbar__search-input:focus {
+  border-color: var(--blue-keolis);
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+[class*='searchHintContainer'] kbd {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: none;
+  color: var(--blueteal-50);
+  font-family: var(--font-mono);
+}
+
+/* Search results pop over the dark navbar but are a light surface. */
+.navbar .dropdown__menu,
+[class*='suggestionsDropdown'],
+[class*='dropdownMenu'] {
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-pop);
+  color: var(--fg1);
+}
+
+[data-theme='dark'] .navbar .dropdown__menu,
+[data-theme='dark'] [class*='suggestionsDropdown'],
+[data-theme='dark'] [class*='dropdownMenu'] {
+  background: var(--darkblue-surface);
+  border-color: var(--hairline-on-dark);
+  color: var(--ifm-color-content);
+}
+
+/* Mobile drawer inherits the dark chrome. */
+.navbar-sidebar {
+  background: var(--bg-chrome);
+  /* The collapse carets are dark PNG-ish masks; flip them for the dark drawer. */
+  --ifm-menu-link-sublist-icon-filter: invert(100%) sepia(94%) saturate(17%)
+    hue-rotate(223deg) brightness(104%) contrast(98%);
+}
+
+.navbar-sidebar .menu__link,
+.navbar-sidebar .navbar__brand {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-sidebar .menu__link:hover,
+.navbar-sidebar .menu__link--active {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--fg-on-dark);
+}
+
+/* Infima fills this bar with the active-menu colour, which is a pale cyan here. */
+.navbar-sidebar__back {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. Doc sidebar — warm light surface, cyan selection
+   ========================================================================== */
+
+/* The container's own border-right already reads --ifm-toc-border-color. */
+.theme-doc-sidebar-container {
+  background: var(--lightgrey-10);
+}
+
+[data-theme='dark'] .theme-doc-sidebar-container {
+  background: var(--darkblue-surface);
+}
+
+.menu {
+  font-size: 0.875rem;
+}
+
+.menu__link {
+  border-radius: var(--radius-md);
+  line-height: 1.4;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--blue-keolis);
+}
+
+.menu__caret:hover,
+.menu__link--sublist-caret:hover {
+  background: var(--lightgrey-25);
+}
+
+[data-theme='dark'] .menu__caret:hover,
+[data-theme='dark'] .menu__link--sublist-caret:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.menu__list-item-collapsible:hover {
+  background: transparent;
+}
+
+/* ==========================================================================
+   6. Content
+   ========================================================================== */
+
+.theme-doc-markdown {
+  padding-bottom: var(--sp-8);
+}
+
+/* --- Tables: the reference tables are wide and dense; card them up.
+   The card chrome lives on .tableWrapper (see src/theme/MDXComponents.tsx),
+   which scrolls horizontally so a wide table can never paint over the TOC. --- */
+.tableWrapper {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch;
+}
+
+.markdown .tableWrapper table {
+  display: table;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.markdown table thead th {
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: bottom;
+  padding: 0.8125rem 1rem;
+}
+
+.markdown table td,
+.markdown table tbody th {
+  border: 0;
+  border-bottom: 1px solid var(--lightgrey-50);
+  vertical-align: top;
+  line-height: 1.5;
+  padding: 0.875rem 1rem;
+}
+
+[data-theme='dark'] .markdown table td,
+[data-theme='dark'] .markdown table tbody th {
+  border-bottom-color: var(--hairline-on-dark);
+}
+
+.markdown table tbody tr:last-child td,
+.markdown table tbody tr:last-child th {
+  border-bottom: 0;
+}
+
+/* Short tokens stay on one line; a long one (an example query string, say)
+   breaks rather than setting the column's min-content width. */
+.markdown table code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* --- Inline code --- */
+.markdown code:not([class*='language']) {
+  border: 1px solid var(--lightgrey-75);
+  color: var(--blueteal-90);
+  padding: 0.12em 0.36em;
+}
+
+[data-theme='dark'] .markdown code:not([class*='language']) {
+  border-color: var(--hairline-on-dark);
+  color: var(--bluekeolis-50);
+}
+
+a code {
+  color: inherit;
+}
+
+/* --- Code blocks. The `div` qualifier beats the theme's own module rule,
+   which would otherwise keep the container at the inline-code radius. --- */
+div.theme-code-block {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme='dark'] div.theme-code-block {
+  border-color: var(--hairline-on-dark);
+  box-shadow: none;
+}
+
+.theme-code-block pre {
+  font-size: 0.8125rem;
+}
+
+.theme-code-block button[class*='copyButton'] {
+  border-radius: var(--radius-md);
+}
+
+/* --- Blockquote: Slate rendered "> Try it on Navitia playground" as a
+   code-gutter callout; keep it a callout, in the brand cyan. --- */
+.markdown blockquote {
+  border-left: 3px solid var(--blue-keolis);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--bluekeolis-10);
+  color: var(--ifm-blockquote-color);
+  padding: var(--sp-3) var(--sp-4);
+}
+
+[data-theme='dark'] .markdown blockquote {
+  background: rgba(0, 174, 206, 0.1);
+}
+
+.markdown blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* --- Admonitions --- */
+.theme-admonition {
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+
+.theme-admonition [class*='admonitionHeading'] {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* --- Images sit on the warm canvas as cards. --- */
+.markdown img {
+  border-radius: var(--radius-lg);
+  max-width: 100%;
+}
+
+hr {
+  background-color: var(--divider);
+}
+
+[data-theme='dark'] hr {
+  background-color: var(--hairline-on-dark);
+}
+
+/* ==========================================================================
+   7. Right column, breadcrumbs, pagination
+   ========================================================================== */
+
+.table-of-contents {
+  font-size: 0.8125rem;
+}
+
+.table-of-contents__link:hover {
+  color: var(--fg1);
+}
+
+[data-theme='dark'] .table-of-contents__link:hover {
+  color: var(--fg-on-dark);
+}
+
+.table-of-contents__link--active,
+.table-of-contents__link--active code {
+  color: var(--fg1);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active,
+[data-theme='dark'] .table-of-contents__link--active code {
+  color: var(--fg-on-dark);
+}
+
+.table-of-contents__left-border {
+  border-left-color: var(--border);
+}
+
+[data-theme='dark'] .table-of-contents__left-border {
+  border-left-color: var(--hairline-on-dark);
+}
+
+.breadcrumbs__item--active .breadcrumbs__link {
+  font-weight: 600;
+}
+
+.breadcrumbs__link {
+  border-radius: var(--radius-md);
+}
+
+.pagination-nav__link {
+  border: 1px solid var(--border);
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--blue-keolis);
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme='dark'] .pagination-nav__link {
+  border-color: var(--hairline-on-dark);
+}
+
+.pagination-nav__sublabel {
+  color: var(--fg2);
+}
+
+.pagination-nav__label {
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   8. Footer — dark chrome, with the sunburst flourish
+   ========================================================================== */
+
+/* `style: 'dark'` gives the footer Infima's own slate palette; take it back. */
+.footer--dark {
+  --ifm-footer-background-color: var(--bg-chrome);
+  --ifm-footer-color: var(--blueteal-50);
+  --ifm-footer-title-color: var(--fg-on-dark);
+  --ifm-footer-link-color: rgba(255, 255, 255, 0.72);
+  --ifm-footer-link-hover-color: var(--blue-keolis);
+}
+
+.footer {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--hairline-on-dark);
+}
+
+/* DS: the one expressive flourish — an oversized, low-opacity sunburst mark
+   bleeding off the edge of the dark chrome. */
+.footer::after {
+  content: '';
+  position: absolute;
+  right: -3rem;
+  bottom: -4.5rem;
+  width: 16rem;
+  height: 16rem;
+  background-color: var(--blue-keolis);
+  -webkit-mask: url('/img/hove/hove-mark.svg') no-repeat center / contain;
+  mask: url('/img/hove/hove-mark.svg') no-repeat center / contain;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.footer__links,
+.footer__bottom {
+  position: relative;
+  z-index: 1;
+}
+
+.footer__title {
+  color: var(--ifm-footer-title-color);
+}
+
+.footer__link-item {
+  transition: color var(--dur) var(--ease);
+}
+
+.footer__copyright {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--blueteal-50);
+}
+
+.footer__logo {
+  margin-bottom: var(--sp-4);
+}
+
+/* ==========================================================================
+   9. Buttons (DS: uppercase, semibold, 8px radius, one-step darker on hover)
+   ========================================================================== */
+
+.button {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.button--primary {
+  background: var(--blue-keolis);
+  border-color: var(--blue-keolis);
+  color: #fff;
+}
+
+.button--primary:hover {
+  background: var(--bluekeolis-hover);
+  border-color: var(--bluekeolis-hover);
+  color: #fff;
+}
