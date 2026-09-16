@@ -435,6 +435,21 @@ h6 {
   background: transparent;
 }
 
+/* Collapse control — lets a reader hide the sidebar and read the page full
+   width. The bottom collapse button and the floating expand tab both read
+   these two variables, so keep them on the sidebar's own surface colour. */
+/* `html:root` — theme-classic declares these on a bare `:root` from a module
+   stylesheet that is injected after this file, so plain `:root` loses the tie. */
+html:root {
+  --docusaurus-collapse-button-bg: var(--lightgrey-10);
+  --docusaurus-collapse-button-bg-hover: var(--lightgrey-25);
+}
+
+html[data-theme='dark']:root {
+  --docusaurus-collapse-button-bg: var(--darkblue-surface);
+  --docusaurus-collapse-button-bg-hover: rgba(255, 255, 255, 0.08);
+}
+
 /* ==========================================================================
    6. Content
    ========================================================================== */

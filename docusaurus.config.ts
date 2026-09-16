@@ -33,8 +33,6 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
-          editUrl:
-            'https://github.com/hove-io/navitia/edit/dev/documentation/navitia-doc/',
         },
         blog: false,
         // Design-system foundations first, then the Infima mapping that uses them.
@@ -111,6 +109,9 @@ const config: Config = {
       additionalLanguages: ['bash', 'json'],
     },
     colorMode: {respectPrefersColorScheme: true},
+    docs: {
+      sidebar: {hideable: true, autoCollapseCategories: false},
+    },
   } satisfies Preset.ThemeConfig,
 };
 
